@@ -1,0 +1,30 @@
+.Coin-container {
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+}
+
+.Coin {
+    height: 100%;
+    position: relative;
+}
+
+.Coin-rotate img {
+    transform: rotateY( -360deg );
+    transition: transform 1s ease;
+}
+
+.Coin-front, .Coin-back {
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    backface-visibility: hidden;
+}
+
+.Coin-front {
+    z-index: 2;
+}
+.Coin-back {
+    transform: rotateY(180deg);
+}
