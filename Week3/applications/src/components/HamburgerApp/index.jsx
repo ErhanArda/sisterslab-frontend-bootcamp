@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ingredientsToAdd from '../../constants/ingredientsToAdd.js';
-
+import './style.css';
 const HamburgerApp = () => {
   const [selectedIngredients, setSelectedIngredients] = useState([]);
 
@@ -35,6 +35,28 @@ const HamburgerApp = () => {
       ]);
     }
   };
+  const removeIngredient = (ingredient) => {
+    const addedIngredient = selectedIngredients.find(
+      (item) => item.id === ingredient.id
+    );
+    if (addedIngredient.count > 1) {
+      setSelectedIngredients(
+        selectedIngredients.map((item) => {
+          if (item.id === ingredient.id) {
+            return {
+              ...item,
+              count: item.count - 1,
+            };
+          }
+          return item;
+        })
+      );
+    } else {
+      setSelectedIngredients(
+        selectedIngredients.filter((item) => item.id !== ingredient.id)
+      );
+    }
+  };
   return (
     <div>
       <h1>Hamburger App</h1>
@@ -54,8 +76,22 @@ const HamburgerApp = () => {
             <li key={ingredient.id}>
               <p>
                 {ingredient.name} <b />
-                <button onClick={() => addIngredient(ingredient)}>Ekle</button>
-                <button onClick={() => removeIngredient(ingredient)}>
+                <button
+                  onClick={() => addIngredient(ingredient)}
+                  className="add-ingredient"
+                >
+                  Ekle
+                </button>
+                <button
+                  onClick={() => removeIngredient(ingredient)}
+                  className={
+                    selectedIngredients.find(
+                      (item) => item.id === ingredient.id
+                    )
+                      ? 'remove-ingredient'
+                      : 'remove-ingredient disabled'
+                  }
+                >
                   Cikar
                 </button>
               </p>

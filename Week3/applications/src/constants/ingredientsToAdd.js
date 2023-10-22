@@ -4,7 +4,7 @@ const ingredientsToAdd = [
     name: 'Marul',
     color: 'green',
     price: 1,
-    count: 2,
+    count: 0,
   },
 
   {
@@ -20,7 +20,7 @@ const ingredientsToAdd = [
     name: 'Köfte',
     color: 'brown',
     price: 6,
-    count: 1,
+    count: 0,
   },
 
   {

@@ -1,0 +1,28 @@
+.add-ingredient {
+	border: 0;
+	padding: 10px;
+	background: green;
+	color: aliceblue;
+	font-weight: bold;
+	border-radius: 5px;
+	margin: 0 5px ;
+	cursor:pointer
+}
+
+.remove-ingredient {
+	border: 0;
+	padding: 10px;
+	background: red;
+	color: aliceblue;
+	font-weight: bold;
+	border-radius: 5px;
+	margin: 0 5px ;
+	cursor:pointer
+
+ }
+
+.remove-ingredient.disabled {
+	background: grey;
+	pointer-events: none;
+}
+
