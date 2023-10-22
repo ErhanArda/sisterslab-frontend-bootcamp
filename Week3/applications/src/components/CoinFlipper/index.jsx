@@ -10,9 +10,9 @@ const getRandomElFromArr = (arr) => {
   return randomItem;
 };
 const CoinFlipper = () => {
-  const [rotate, setRotate] = useState(false);
   const [currentStatus, setCurrentStatus] = useState(options[0]);
   const [results, setResults] = useState([]);
+  const [rotate, setRotate] = useState(false);
 
   const start = () => {
     setRotate(true);
@@ -24,22 +24,29 @@ const CoinFlipper = () => {
     }, 1000);
   };
 
+  const heads = results.filter((item) => item === options[0]).length;
+  const tails = results.filter((item) => item === options[1]).length;
+
   return (
-    <div>
+    <div className="Coin-container">
       <h1>Yazi ya da Tura</h1>
-      <br />
       <Coin currentStatus={currentStatus} rotate={rotate} />
       <br />
 
       <button onClick={start}>Atis Yap</button>
-
-      {/* Tura geldi
-
-      Toplam 24 atış yapıldı
-
-      11 kez Yazı geldi
-
-      13 kez Tura geldi */}
+      {results.length > 0 && !rotate && <h3>{currentStatus} geldi</h3>}
+      <p>
+        Toplam <span className="CoinFlipper-number">{results.length}</span> atış
+        yapıldı
+      </p>
+      <p>
+        <span className="CoinFlipper-number">{heads}</span> kez <b>Yazı </b>
+        geldi
+      </p>
+      <p>
+        <span className="CoinFlipper-number">{tails}</span> kez <b>Tura </b>
+        geldi
+      </p>
     </div>
   );
 };

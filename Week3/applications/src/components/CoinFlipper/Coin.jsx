@@ -11,12 +11,12 @@ const Coin = (props) => {
           src={CoinTail}
           alt=""
           className={currentStatus === 'yazi' ? 'Coin-back' : 'Coin-front'}
-        ></img>
+        />
         <img
           src={CoinHead}
           alt=""
           className={currentStatus === 'yazi' ? 'Coin-front' : 'Coin-back'}
-        ></img>
+        />
       </div>
     </div>
   );
