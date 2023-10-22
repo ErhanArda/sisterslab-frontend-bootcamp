@@ -2,6 +2,7 @@ import CoinFlipper from './components/CoinFlipper';
 import Counter from './components/Counter';
 import HamburgerApp from './components/HamburgerApp';
 import Text from './components/Text';
+import TodoApp from './components/TodoApp';
 
 const App = () => {
   return (
@@ -13,7 +14,8 @@ const App = () => {
       <Text placeholder="Type something" />
       <br /> */}
       {/* <CoinFlipper /> */}
-      <HamburgerApp />
+      {/* <HamburgerApp /> */}
+      <TodoApp />
     </div>
   );
 };
