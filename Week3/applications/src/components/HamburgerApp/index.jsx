@@ -82,7 +82,18 @@ const HamburgerApp = () => {
                 >
                   Ekle
                 </button>
-                <button
+                {selectedIngredients.find(
+                  (item) => item.id === ingredient.id
+                ) && (
+                  <button
+                    onClick={() => removeIngredient(ingredient)}
+                    className="remove-ingredient"
+                  >
+                    Cikar
+                  </button>
+                )}
+                {/* eger butonu css ile disabled olarak gostermek istiyorsaniz asagidaki kod parcacini calistirabilirsiniz */}
+                {/* <button
                   onClick={() => removeIngredient(ingredient)}
                   className={
                     selectedIngredients.find(
@@ -93,7 +104,7 @@ const HamburgerApp = () => {
                   }
                 >
                   Cikar
-                </button>
+                </button> */}
               </p>
             </li>
           ))}
