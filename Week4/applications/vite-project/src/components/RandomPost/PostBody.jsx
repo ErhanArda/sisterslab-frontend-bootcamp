@@ -7,7 +7,7 @@ const PostBody = ({ id }) => {
     fetch(`https://dummyjson.com/posts/${id}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log('data :>> ', data);
+        setText(data.body);
       });
   }, [id]);
 
