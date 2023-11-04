@@ -13,8 +13,11 @@ import {
   Typography,
 } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { useRouter } from 'next/router';
 
 const Characters = () => {
+  const router = useRouter();
+
   const [characters, setCharacters] = useState([]);
   const [selectedCharacter, setSelectedCharacter] = useState(null);
   const getCharacters = async () => {
@@ -29,7 +32,10 @@ const Characters = () => {
   const handleCharacterSelect = (e, value) => {
     setSelectedCharacter(value);
   };
-  console.log('selectedCharacter :>> ', selectedCharacter);
+
+  const handleClick = (id) => {
+    router.push(`/characters/${id}`);
+  };
 
   const filteredCharacters = selectedCharacter
     ? characters.filter((character) => character.id === selectedCharacter.id)
@@ -72,8 +78,12 @@ const Characters = () => {
               <IconButton aria-label="add to favorites">
                 <FavoriteIcon color="error" />
               </IconButton>
-              <Button size="small" variant="text">
-                Details
+              <Button
+                size="small"
+                variant="text"
+                onClick={() => handleClick(character.id)}
+              >
+                Learn More
               </Button>
             </CardActions>
           </Card>

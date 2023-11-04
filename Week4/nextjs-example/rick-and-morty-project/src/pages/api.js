@@ -14,3 +14,8 @@ export const fetchCharacters = async () => {
   const response = await axiosInstance.get('/character');
   return response.data.results;
 };
+
+export const fetchCharacter = async (id) => {
+  const response = await axiosInstance.get(`/character/${id}`);
+  return response.data;
+};
