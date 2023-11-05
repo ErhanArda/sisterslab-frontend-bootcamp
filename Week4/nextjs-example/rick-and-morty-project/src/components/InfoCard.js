@@ -43,16 +43,18 @@ const InfoCard = ({
       </CardContent>
 
       <CardActions>
-        <IconButton
-          aria-label="add to favorites"
-          onClick={() => handleFavoriteToggle(character.id)}
-        >
-          <IsSkeleton loading={loading} variant="circular" width={30}>
-            <FavoriteIcon
-              color={isFavorite(character.id) ? 'error' : 'disabled'}
-            />
-          </IsSkeleton>
-        </IconButton>
+        {isFavorite && (
+          <IconButton
+            aria-label="add to favorites"
+            onClick={() => handleFavoriteToggle(character.id)}
+          >
+            <IsSkeleton loading={loading} variant="circular" width={30}>
+              <FavoriteIcon
+                color={isFavorite(character.id) ? 'error' : 'disabled'}
+              />
+            </IsSkeleton>
+          </IconButton>
+        )}
         <Button
           size="small"
           variant="text"
@@ -71,7 +73,7 @@ InfoCard.propTypes = {
   character: PropTypes.object.isRequired,
   handleFavoriteToggle: PropTypes.func.isRequired,
   handleClick: PropTypes.func.isRequired,
-  isFavorite: PropTypes.func.isRequired,
+  isFavorite: PropTypes.func,
   loading: PropTypes.bool,
 };
 

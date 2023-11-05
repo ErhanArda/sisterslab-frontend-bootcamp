@@ -20,27 +20,23 @@ const Characters = () => {
   const [searchText, setSearchText] = useState('');
   const [searchBy, setSearchBy] = useState('name');
   const [errorFetch, setErrorFetch] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const fetchCharacterData = () => {
-    if (searchText) {
-      fetchCharacterWithSearch(searchText, searchBy)
-        .then((charactersList) => {
-          setCharacters(charactersList);
-          setErrorFetch(null);
-        })
-        .catch((error) => {
-          setErrorFetch(error.message || 'Bir hata oluştu');
-        });
-    } else {
-      fetchCharacters()
-        .then((charactersList) => {
-          setCharacters(charactersList);
-          setErrorFetch(null);
-        })
-        .catch((error) => {
-          setErrorFetch(error.message || 'Bir hata oluştu');
-        });
-    }
+    setLoading(true);
+    const fetchFunction = searchText
+      ? fetchCharacterWithSearch
+      : fetchCharacters;
+
+    fetchFunction(searchText, searchBy)
+      .then((charactersList) => {
+        setCharacters(charactersList);
+        setErrorFetch(null);
+      })
+      .catch((error) => {
+        setErrorFetch(error.message || 'Bir hata oluştu');
+      })
+      .finally(() => setLoading(false));
   };
   useEffect(() => {
     fetchCharacterData();
@@ -115,6 +111,7 @@ const Characters = () => {
               handleFavoriteToggle={handleFavoriteToggle}
               isFavorite={isFavorite}
               handleClick={handleClick}
+              loading={loading}
             />
           ))
         )}
