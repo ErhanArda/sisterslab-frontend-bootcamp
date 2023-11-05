@@ -9,44 +9,58 @@ import {
   Typography,
 } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import IsSkeleton from './IsSkeleton';
 
 const InfoCard = ({
   character,
   handleFavoriteToggle,
   isFavorite,
   handleClick,
+  loading,
 }) => {
   return (
     <Card key={character.id} sx={{ width: '150px' }}>
-      <CardMedia
-        component="img"
-        alt="character"
-        height="140"
-        image={character.image}
-      />
+      <IsSkeleton loading={loading} width={300} height={140}>
+        <CardMedia
+          component="img"
+          alt="character"
+          height="140"
+          image={character.image}
+        />
+      </IsSkeleton>
       <CardContent>
-        <Typography variant="h5" component="div">
-          {character.name}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {character.gender} {character.status}
-        </Typography>
+        <IsSkeleton loading={loading} width="80%">
+          <Typography variant="h5" component="div">
+            {character.name}
+          </Typography>
+        </IsSkeleton>
+
+        <IsSkeleton loading={loading} width="60%">
+          <Typography variant="body2" color="text.secondary">
+            {character.gender} {character.status}
+          </Typography>
+        </IsSkeleton>
       </CardContent>
+
       <CardActions>
         <IconButton
           aria-label="add to favorites"
           onClick={() => handleFavoriteToggle(character.id)}
         >
-          <FavoriteIcon
-            color={isFavorite(character.id) ? 'error' : 'disabled'}
-          />
+          <IsSkeleton loading={loading} variant="circular" width={30}>
+            <FavoriteIcon
+              color={isFavorite(character.id) ? 'error' : 'disabled'}
+            />
+          </IsSkeleton>
         </IconButton>
         <Button
           size="small"
           variant="text"
           onClick={() => handleClick(character.id)}
         >
-          Learn More
+          <IsSkeleton loading={loading} width="100px">
+            Learn More
+          </IsSkeleton>
         </Button>
       </CardActions>
     </Card>
@@ -58,6 +72,7 @@ InfoCard.propTypes = {
   handleFavoriteToggle: PropTypes.func.isRequired,
   handleClick: PropTypes.func.isRequired,
   isFavorite: PropTypes.func.isRequired,
+  loading: PropTypes.bool,
 };
 
 InfoCard.defaultProps = {
