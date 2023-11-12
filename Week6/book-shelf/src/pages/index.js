@@ -53,7 +53,14 @@ const Home = () => {
                     Details
                   </Button>
                 </Link>
-                <Button size="small">Edit</Button>
+                <Link
+                  href={`/edit-books/${book.id}`}
+                  style={{ textDecoration: 'none' }}
+                >
+                  <Button variant="outlined" size="small">
+                    Edit
+                  </Button>
+                </Link>
               </CardActions>
             </CardActionArea>
           </Card>

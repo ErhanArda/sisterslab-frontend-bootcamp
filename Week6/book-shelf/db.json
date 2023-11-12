@@ -17,6 +17,15 @@
       "currency": "USD",
       "description": "The Lord of the Rings is an epic high fantasy novel written by English author and scholar J. R. R. Tolkien. The story began as a sequel to Tolkien's 1937 fantasy novel The Hobbit, but eventually developed into a much larger work.",
       "imageUrl": null
+    },
+    {
+      "id": 3,
+      "title": "",
+      "author": "J.R.R. Tolkien",
+      "price": 39.99,
+      "currency": "USD",
+      "description": "The Lord of the Rings is an epic high fantasy novel written by English author and scholar J. R. R. Tolkien. The story began as a sequel to Tolkien's 1937 fantasy novel The Hobbit, but eventually developed into a much larger work.",
+      "imageUrl": null
     }
   ],
   "posts": [{ "id": 1, "title": "json-server", "author": "typicode" }],
