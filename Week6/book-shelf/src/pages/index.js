@@ -1,6 +1,8 @@
 import {
+  Button,
   Card,
   CardActionArea,
+  CardActions,
   CardContent,
   CardMedia,
   Grid,
@@ -26,26 +28,35 @@ const Home = () => {
     <Grid container spacing={2}>
       {books.map((book) => (
         <Grid item key={book.id} xs={12} sm={6} md={4}>
-          <Link href={`/books/${book.id}`} style={{ textDecoration: 'none' }}>
-            <Card sx={{ maxWidth: 345 }}>
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image={book.imageUrl ?? 'https://picsum.photos/200/300'}
-                  alt={book.title}
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    {book.title}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {book.description.substring(0, 100)}...
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Link>
+          <Card sx={{ maxWidth: 345 }}>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                height="140"
+                image={book.imageUrl ?? 'https://picsum.photos/200/300'}
+                alt={book.title}
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  {book.title}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {book.description.substring(0, 100)}...
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Link
+                  href={`/books/${book.id}`}
+                  style={{ textDecoration: 'none' }}
+                >
+                  <Button variant="contained" size="small">
+                    Details
+                  </Button>
+                </Link>
+                <Button size="small">Edit</Button>
+              </CardActions>
+            </CardActionArea>
+          </Card>
         </Grid>
       ))}
     </Grid>
