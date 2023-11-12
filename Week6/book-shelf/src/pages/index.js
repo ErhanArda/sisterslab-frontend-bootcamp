@@ -26,6 +26,11 @@ const Home = () => {
 
   return (
     <Grid container spacing={2}>
+      <Link href="/add-book">
+        <Button variant="contained" color="primary">
+          Add Book
+        </Button>
+      </Link>
       {books &&
         books.map((book) => (
           <Grid item key={book.id} xs={12} sm={6} md={4}>
