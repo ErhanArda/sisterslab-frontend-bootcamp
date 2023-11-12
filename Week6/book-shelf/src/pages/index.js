@@ -7,6 +7,7 @@ import {
   Typography,
 } from '@mui/material';
 import axios from 'axios';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 const Home = () => {
@@ -23,9 +24,9 @@ const Home = () => {
 
   return (
     <Grid container spacing={2}>
-      {books &&
-        books.map((book) => (
-          <Grid item key={book.id} xs={12} sm={6} md={4}>
+      {books.map((book) => (
+        <Grid item key={book.id} xs={12} sm={6} md={4}>
+          <Link href={`/books/${book.id}`} style={{ textDecoration: 'none' }}>
             <Card sx={{ maxWidth: 345 }}>
               <CardActionArea>
                 <CardMedia
@@ -39,13 +40,14 @@ const Home = () => {
                     {book.title}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    {book.description.substring(0, 100)}
+                    {book.description.substring(0, 100)}...
                   </Typography>
                 </CardContent>
               </CardActionArea>
             </Card>
-          </Grid>
-        ))}
+          </Link>
+        </Grid>
+      ))}
     </Grid>
   );
 };
