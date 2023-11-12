@@ -18,6 +18,15 @@ import * as Yup from 'yup';
 
 const BookSchema = Yup.object().shape({
   title: Yup.string().required('Title is required'),
+  author: Yup.string().required('Author is required'),
+  description: Yup.string()
+    .min(2, 'Too short!')
+    .max(250, 'Too Long!')
+    .required('Description is required'),
+  price: Yup.number()
+    .positive('Price must be a positive number')
+    .required('Price is required'),
+  imageUrl: Yup.string().url('Must be a valid URL').nullable(),
 });
 
 const EditBook = () => {
@@ -36,10 +45,16 @@ const EditBook = () => {
     },
     validationSchema: BookSchema,
     onSubmit: async (values) => {
-      console.log('values :>> ', values);
+      try {
+        await axios.put(`http://localhost:3001/books/${id}`, values);
+        alert('Book updated succesfully!');
+        router.push('/');
+      } catch (error) {
+        alert('Failed to update book');
+      }
     },
   });
-  console.log('formik.touched :>> ', formik.touched);
+
   useEffect(() => {
     const fetchBookData = async () => {
       setLoading(true);
@@ -80,6 +95,7 @@ const EditBook = () => {
               margin="normal"
               error={formik.touched.title && Boolean(formik.errors.title)}
               helperText={formik.touched.title && formik.errors.title}
+              onBlur={formik.handleBlur}
             />
             <TextField
               fullWidth
@@ -89,6 +105,9 @@ const EditBook = () => {
               value={formik.values.author}
               onChange={formik.handleChange}
               margin="normal"
+              error={formik.touched.author && Boolean(formik.errors.author)}
+              helperText={formik.touched.author && formik.errors.author}
+              onBlur={formik.handleBlur}
             />
             <TextField
               fullWidth
@@ -100,6 +119,13 @@ const EditBook = () => {
               margin="normal"
               multiline
               rows={4}
+              error={
+                formik.touched.description && Boolean(formik.errors.description)
+              }
+              helperText={
+                formik.touched.description && formik.errors.description
+              }
+              onBlur={formik.handleBlur}
             />
             <Stack
               direction="row"
@@ -130,6 +156,9 @@ const EditBook = () => {
                 value={formik.values.price}
                 onChange={formik.handleChange}
                 margin="normal"
+                error={formik.touched.price && Boolean(formik.errors.price)}
+                helperText={formik.touched.price && formik.errors.price}
+                onBlur={formik.handleBlur}
               />
             </Stack>
             <TextField
@@ -140,6 +169,8 @@ const EditBook = () => {
               value={formik.values.imageUrl}
               onChange={formik.handleChange}
               margin="normal"
+              error={formik.touched.imageUrl && Boolean(formik.errors.imageUrl)}
+              helperText={formik.touched.imageUrl && formik.errors.imageUrl}
             />
             <Button color="primary" variant="contained" fullWidth type="submit">
               Update Book
