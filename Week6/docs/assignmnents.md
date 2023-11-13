@@ -13,7 +13,7 @@
 4. **formik**
    bir login ve signUp sayfasi yazin, ve burada formik ve yup kullanarak validation kontrolu yapin
 
-signuo icin sun bilgileri girmeli kullanici adi, email ve password, telefon numarasi ve adres bilgisi istege bagli olmali ama en az 10 karakter ,en fazla 50 karakter olmali
+   signup icin su bilgileri girmeli kullanici adi, email ve password, telefon numarasi ve adres bilgisi istege bagli olmali ama en az 10 karakter ,en fazla 50 karakter olmali
 
 5. **useMemo ve useCallback**
    useMemo ve useCallback konularini tekrar edin
