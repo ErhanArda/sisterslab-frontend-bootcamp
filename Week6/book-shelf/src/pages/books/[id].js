@@ -2,7 +2,7 @@ import { Container, Typography } from '@mui/material';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-
+import { currencySymbol } from '../../lib/helpers/currencyHelper';
 const BookDetail = () => {
   const router = useRouter();
   const { id } = router.query;
@@ -31,7 +31,7 @@ const BookDetail = () => {
       <Typography variant="h4">{book.title}</Typography>
       <Typography variant="h5">{book.author}</Typography>
       <Typography variant="h6">
-        {book.currency} {book.price}
+        {currencySymbol(book.currency)} {book.price}
       </Typography>
       <Typography variant="body">{book.description}</Typography>
     </Container>
