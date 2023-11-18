@@ -6,14 +6,17 @@ import {
   CardContent,
   CardMedia,
   Grid,
+  Stack,
+  TextField,
   Typography,
 } from '@mui/material';
 import axios from 'axios';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const Home = () => {
   const [books, setBooks] = useState([]);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     axios
@@ -24,13 +27,34 @@ const Home = () => {
       .catch((error) => console.error('error :>> ', error));
   }, []);
 
+  const handleSearch = useCallback(() => {
+    axios
+      .get(`http://localhost:3001/books?q=${search}`)
+      .then((response) => {
+        setBooks(response.data);
+      })
+      .catch((error) => console.log('error :>> ', error));
+  }, [search]);
+
   return (
     <Grid container spacing={2}>
+      <Stack direction="row" justifyContent="center" alignItems="center">
+        <TextField
+          label="Search Books"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          size="small"
+        />
+        <Button variant="contained" color="primary" onClick={handleSearch}>
+          Search
+        </Button>
+      </Stack>
       <Link href="/add-book">
         <Button variant="contained" color="primary">
           Add Book
         </Button>
       </Link>
+
       {books &&
         books.map((book) => (
           <Grid item key={book.id} xs={12} sm={6} md={4}>
