@@ -1,3 +1,4 @@
+import { currencies } from '@/lib/helpers/currencyHelper';
 import {
   Button,
   Container,
@@ -115,9 +116,11 @@ const AddBook = () => {
                   value={formik.values.currency}
                   onChange={formik.handleChange}
                 >
-                  <MenuItem value="TRY">TRY</MenuItem>
-                  <MenuItem value="USD">USD</MenuItem>
-                  <MenuItem value="EUR">EUR</MenuItem>
+                  {currencies.map((currency) => (
+                    <MenuItem key={currency.value} value={currency.value}>
+                      {currency.value} - {currency.label}
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
               <TextField
