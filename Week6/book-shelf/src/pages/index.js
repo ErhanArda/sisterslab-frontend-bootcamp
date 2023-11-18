@@ -36,6 +36,18 @@ const Home = () => {
       .catch((error) => console.log('error :>> ', error));
   }, [search]);
 
+  const handleDelete = useCallback(
+    (id) => {
+      axios
+        .delete(`http://localhost:3001/books/${id}`)
+        .then(() => {
+          setBooks(books.filter((book) => book.id !== id));
+        })
+        .catch((error) => console.error(error));
+    },
+    [books]
+  );
+
   return (
     <Grid container spacing={2}>
       <Stack direction="row" justifyContent="center" alignItems="center">
@@ -91,6 +103,13 @@ const Home = () => {
                       Edit
                     </Button>
                   </Link>
+                  <Button
+                    size="small"
+                    color="error"
+                    onClick={() => handleDelete(book.id)}
+                  >
+                    Delete
+                  </Button>
                 </CardActions>
               </CardActionArea>
             </Card>
