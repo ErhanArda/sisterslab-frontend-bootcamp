@@ -34,7 +34,9 @@ export const todoSlice = createSlice({
   name: 'todo',
   initialState,
   reducers: {
-    //senkron reducer
+    removeAllTodos: (state) => {
+      state.todos = [];
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -58,4 +60,5 @@ export const todoSlice = createSlice({
   },
 });
 
+export const { removeAllTodos } = todoSlice.actions;
 export default todoSlice.reducer;
