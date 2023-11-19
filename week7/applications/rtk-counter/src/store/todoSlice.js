@@ -22,6 +22,14 @@ export const addTodoAsync = createAsyncThunk('todo/addTodo', async (todo) => {
   return response.data;
 });
 
+export const removeTodoAsync = createAsyncThunk(
+  'todo/remove',
+  async (todoId) => {
+    await axios.delete(`https://jsonplaceholder.typicode.com/todos/${todoId}`);
+    return todoId;
+  }
+);
+
 export const todoSlice = createSlice({
   name: 'todo',
   initialState,
@@ -43,6 +51,9 @@ export const todoSlice = createSlice({
       })
       .addCase(addTodoAsync.fulfilled, (state, action) => {
         state.todos.push(action.payload);
+      })
+      .addCase(removeTodoAsync.fulfilled, (state, action) => {
+        state.todos = state.todos.filter((todo) => todo.id !== action.payload);
       });
   },
 });

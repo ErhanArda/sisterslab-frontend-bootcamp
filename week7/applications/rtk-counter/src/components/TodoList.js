@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTodoAsync, fetchTodos } from '@/store/todoSlice';
+import { addTodoAsync, fetchTodos, removeTodoAsync } from '@/store/todoSlice';
 
 const TodoList = () => {
   const todos = useSelector((state) => state.todo.todos);
@@ -17,6 +17,10 @@ const TodoList = () => {
     setTodoText('');
   };
 
+  const handleRemove = (todoId) => {
+    dispatch(removeTodoAsync(todoId));
+  };
+
   return (
     <div>
       <input
@@ -28,7 +32,10 @@ const TodoList = () => {
       <button onClick={handleAddTodo}>Ekle</button>
       <ul>
         {todos.map((todo) => (
-          <li key={todo.id}>{todo.title}</li>
+          <li key={todo.id}>
+            {todo.title}
+            <button onClick={() => handleRemove(todo.id)}>Delete</button>
+          </li>
         ))}
       </ul>
     </div>
