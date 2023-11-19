@@ -1,6 +1,6 @@
-import { loginUser } from '@/store/userSlice';
-import { Box, Button, Container, TextField, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
+import { Box, Button, Container, TextField, Typography } from '@mui/material';
+import { loginUser } from '../store/userSlice';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -21,12 +21,12 @@ const Login = () => {
         sx={{
           marginTop: 8,
           display: 'flex',
-          justifyContent: 'center',
+          flexDirection: 'column',
           alignItems: 'center',
         }}
       >
         <Typography component="h1" variant="h5">
-          Giris Yap
+          Giriş Yap
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
@@ -43,11 +43,11 @@ const Login = () => {
             margin="normal"
             required
             fullWidth
-            id="password"
-            label="Sifre"
             name="password"
-            autoComplete="password"
-            autoFocus
+            label="Şifre"
+            type="password"
+            id="password"
+            autoComplete="current-password"
           />
           <Button
             type="submit"
@@ -55,11 +55,11 @@ const Login = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Giris Yap
+            Giriş Yap
           </Button>
+          {error && <Typography color="error">Hata: {error}</Typography>}
         </Box>
       </Box>
-      {error && <Typography color="error">Hata: {error}</Typography>}
     </Container>
   );
 };
