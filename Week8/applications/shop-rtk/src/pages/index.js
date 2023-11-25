@@ -1,5 +1,11 @@
+import ImageSlider from '@/components/ImageSlider';
+
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <div>
+      <ImageSlider />
+    </div>
+  );
 };
 
 export default Home;
