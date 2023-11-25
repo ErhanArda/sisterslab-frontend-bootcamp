@@ -8,6 +8,7 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const userData = {
       email: e.target.email.value,
       password: e.target.password.value,
