@@ -41,7 +41,7 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <Stack direction="column" spacing={4}>
       <ImageSlider />
       <Stack direction="row" spacing={3}>
         <Stack
@@ -50,7 +50,7 @@ const Home = () => {
             borderRadius: '4px',
             background: 'aliceBlue',
             padding: '20px',
-            boxShadow: '0 0 10px rgba(0,0,0,0.2)',
+            boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
             // height: 'fit-content',
           }}
           divider={<Divider orientation="horizontal" flexItem />}
@@ -106,7 +106,7 @@ const Home = () => {
               ))}
         </Stack>
       </Stack>
-    </div>
+    </Stack>
   );
 };
 
