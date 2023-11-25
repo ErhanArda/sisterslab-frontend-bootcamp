@@ -17,7 +17,7 @@ const Navbar = () => {
             router.push('/');
           }}
         >
-          Anasayfa
+          Home Page
         </Button>
 
         {isLoggedIn ? (

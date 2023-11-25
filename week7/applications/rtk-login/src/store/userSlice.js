@@ -22,6 +22,21 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+export const registerUser = createAsyncThunk(
+  'user/register',
+  async (userData, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        'https://reqres.in/api/register',
+        userData
+      );
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.response.data.error);
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -40,6 +55,14 @@ const userSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.error = action.payload || 'Giris Yapilamadi';
+      })
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.isLoggedIn = false;
+        state.error = null;
+      })
+      .addCase(registerUser.rejected, (state, action) => {
+        state.error = action.payload || 'Kayit Yapilamadi';
       });
   },
 });
