@@ -21,6 +21,7 @@ import {
   Typography,
   styled,
 } from '@mui/material';
+import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -30,6 +31,7 @@ const PriceDisplay = styled(Box)(({ theme }) => ({
 }));
 
 const Home = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const { categories, loadingCategories, defaultCategory } = useSelector(
     (state) => state.products
@@ -134,6 +136,7 @@ const Home = () => {
                 <Card
                   key={product.id}
                   sx={{ maxWidth: 345, cursor: 'pointer' }}
+                  onClick={() => router.push(`/products/${product.id}`)}
                 >
                   <CardMedia
                     component="img"

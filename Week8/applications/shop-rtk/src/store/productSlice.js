@@ -8,6 +8,8 @@ const initialState = {
   loadingProducts: false,
   error: null,
   defaultCategory: 'electronics',
+  productDetails: {},
+  loadingProductDetails: false,
 };
 
 export const fetchCategories = createAsyncThunk(
@@ -25,6 +27,16 @@ export const fetchProductByCategory = createAsyncThunk(
   async (category) => {
     const response = await axios.get(
       `https://fakestoreapi.com/products/category/${category}`
+    );
+    return response.data;
+  }
+);
+
+export const fetchProductDetails = createAsyncThunk(
+  'products/fetchProductDetails',
+  async (productId) => {
+    const response = await axios.get(
+      `https://fakestoreapi.com/products/${productId}`
     );
     return response.data;
   }
@@ -58,6 +70,17 @@ const productsSlice = createSlice({
       .addCase(fetchProductByCategory.rejected, (state, action) => {
         state.loadingProducts = false;
         state.error = action.error.message;
+      })
+      .addCase(fetchProductDetails.pending, (state) => {
+        state.loadingProductDetails = true;
+      })
+      .addCase(fetchProductDetails.fulfilled, (state, action) => {
+        state.productDetails = action.payload;
+        state.loadingProductDetails = false;
+      })
+      .addCase(fetchProductDetails.rejected, (state, action) => {
+        state.error = action.error.message;
+        state.loadingProductDetails = false;
       });
   },
 });
