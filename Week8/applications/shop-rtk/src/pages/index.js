@@ -7,11 +7,15 @@ import {
   CardContent,
   CardMedia,
   Divider,
+  FormControl,
+  InputLabel,
   List,
   ListItem,
   ListItemButton,
   ListItemText,
+  MenuItem,
   Rating,
+  Select,
   Skeleton,
   Stack,
   Typography,
@@ -34,6 +38,14 @@ const Home = () => {
   const { products, loadingProducts } = useSelector((state) => state.products);
 
   const [selectedCategory, setSelectedCategory] = useState(defaultCategory);
+  const [sortOrder, setSortOrder] = useState('inc');
+
+  const handleSortChange = () => {
+    setSortOrder(sortOrder === 'inc' ? 'dec' : 'inc');
+  };
+
+  const sortedProducts =
+    sortOrder === 'inc' ? products : [...products].reverse();
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -54,6 +66,18 @@ const Home = () => {
   return (
     <Stack direction="column" spacing={4}>
       <ImageSlider />
+      <FormControl variant="outlined" sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="sort-order">Sort</InputLabel>
+        <Select
+          id="sort-order-select"
+          value={sortOrder}
+          label="Sort"
+          onChange={handleSortChange}
+        >
+          <MenuItem value="inc">Inc</MenuItem>
+          <MenuItem value="dec">Dec</MenuItem>
+        </Select>
+      </FormControl>
       <Stack direction="row" spacing={3}>
         <Stack
           direction="column"
@@ -96,7 +120,7 @@ const Home = () => {
                   </CardContent>
                 </Card>
               ))
-            : products.map((product) => (
+            : sortedProducts.map((product) => (
                 <Card
                   key={product.id}
                   sx={{ maxWidth: 345, cursor: 'pointer' }}
