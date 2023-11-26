@@ -11,6 +11,7 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  Rating,
   Skeleton,
   Stack,
   Typography,
@@ -51,7 +52,7 @@ const Home = () => {
             background: 'aliceBlue',
             padding: '20px',
             boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
-            // height: 'fit-content',
+            height: 'fit-content',
           }}
           divider={<Divider orientation="horizontal" flexItem />}
         >
@@ -101,6 +102,22 @@ const Home = () => {
                       {product.title}
                     </Typography>
                     <PriceDisplay>${product.price}</PriceDisplay>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        mt: 2,
+                      }}
+                    >
+                      <Rating
+                        name="read-only"
+                        value={product.rating.rate}
+                        readOnly
+                      />
+                      <Typography variant="body2" color="text.secondary">
+                        ({product.rating.count} reviews)
+                      </Typography>
+                    </Box>
                   </CardContent>
                 </Card>
               ))}
