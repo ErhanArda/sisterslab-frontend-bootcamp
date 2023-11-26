@@ -7,6 +7,7 @@ const initialState = {
   loadingCategories: false,
   loadingProducts: false,
   error: null,
+  defaultCategory: 'electronics',
 };
 
 export const fetchCategories = createAsyncThunk(

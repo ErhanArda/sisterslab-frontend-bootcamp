@@ -27,7 +27,7 @@ const PriceDisplay = styled(Box)(({ theme }) => ({
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { categories, loadingCategories } = useSelector(
+  const { categories, loadingCategories, defaultCategory } = useSelector(
     (state) => state.products
   );
 
@@ -40,6 +40,11 @@ const Home = () => {
   const handleCategoryClick = (category) => {
     dispatch(fetchProductByCategory(category));
   };
+
+  useEffect(() => {
+    // const defaultCategory = 'electronics';
+    dispatch(fetchProductByCategory(defaultCategory));
+  }, [dispatch]);
 
   return (
     <Stack direction="column" spacing={4}>
