@@ -4,10 +4,21 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { Stack } from '@mui/material';
+import { Badge, Stack } from '@mui/material';
 import { Search, SearchIconWrapper, StyledInputBase } from './style';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchFromLocalStorage, updateCart } from '@/store/cartSlice';
 
 const DashboardLayout = ({ children }) => {
+  const { itemCount } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const cartFromLocalStorage = fetchFromLocalStorage();
+    dispatch(updateCart(cartFromLocalStorage));
+  }, [dispatch]);
+
   return (
     <>
       <AppBar position="static">
@@ -29,7 +40,9 @@ const DashboardLayout = ({ children }) => {
             <FavoriteBorderIcon />
           </IconButton>
           <IconButton color="inherit">
-            <ShoppingCartIcon />
+            <Badge badgeContent={itemCount} color="error">
+              <ShoppingCartIcon />
+            </Badge>
           </IconButton>
         </Toolbar>
       </AppBar>

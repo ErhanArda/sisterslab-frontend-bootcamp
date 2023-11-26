@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { addToCart } from '@/store/cartSlice';
 
 const StyledImageBox = styled(Box)(({ theme }) => ({
   width: '100%',
@@ -44,6 +45,17 @@ const ProductDetails = () => {
   };
   const handleDecrease = () => {
     setCount((prevCount) => (prevCount > 1 ? prevCount - 1 : 1));
+  };
+  const handleAddToCart = () => {
+    dispatch(
+      addToCart({
+        id: productDetails.id,
+        title: productDetails.title,
+        image: productDetails.image,
+        price: productDetails.price,
+        count: count,
+      })
+    );
   };
 
   useEffect(() => {
@@ -108,6 +120,7 @@ const ProductDetails = () => {
             variant="contained"
             startIcon={<AddShoppingCartIcon />}
             sx={{ width: '200px' }}
+            onClick={handleAddToCart}
           >
             Add to Cart
           </Button>
