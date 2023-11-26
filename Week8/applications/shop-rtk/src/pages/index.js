@@ -17,7 +17,7 @@ import {
   Typography,
   styled,
 } from '@mui/material';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 const PriceDisplay = styled(Box)(({ theme }) => ({
@@ -33,12 +33,17 @@ const Home = () => {
 
   const { products, loadingProducts } = useSelector((state) => state.products);
 
+  const [selectedCategory, setSelectedCategory] = useState(defaultCategory);
+
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
 
   const handleCategoryClick = (category) => {
-    dispatch(fetchProductByCategory(category));
+    if (category !== selectedCategory) {
+      setSelectedCategory(category);
+      dispatch(fetchProductByCategory(category));
+    }
   };
 
   useEffect(() => {
