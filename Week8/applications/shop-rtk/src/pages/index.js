@@ -21,7 +21,7 @@ import {
   Typography,
   styled,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 const PriceDisplay = styled(Box)(({ theme }) => ({
@@ -51,12 +51,22 @@ const Home = () => {
     dispatch(fetchCategories());
   }, [dispatch]);
 
-  const handleCategoryClick = (category) => {
-    if (category !== selectedCategory) {
-      setSelectedCategory(category);
-      dispatch(fetchProductByCategory(category));
-    }
-  };
+  // const handleCategoryClick = (category) => {
+  //   if (category !== selectedCategory) {
+  //     setSelectedCategory(category);
+  //     dispatch(fetchProductByCategory(category));
+  //   }
+  // };
+
+  const handleCategoryClick = useCallback(
+    (category) => {
+      if (category !== selectedCategory) {
+        setSelectedCategory(category);
+        dispatch(fetchProductByCategory(category));
+      }
+    },
+    [selectedCategory, dispatch]
+  );
 
   useEffect(() => {
     // const defaultCategory = 'electronics';
