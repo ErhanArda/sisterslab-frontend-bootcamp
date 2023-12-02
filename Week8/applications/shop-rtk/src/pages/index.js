@@ -1,26 +1,23 @@
 import ImageSlider from '@/components/ImageSlider';
+import SelectMenu from '@/components/SelectMenu';
 import { fetchCategories, fetchProductByCategory } from '@/store/productSlice';
-
 import {
   Box,
   Card,
   CardContent,
   CardMedia,
   Divider,
-  FormControl,
-  InputLabel,
   List,
   ListItem,
   ListItemButton,
   ListItemText,
-  MenuItem,
   Rating,
-  Select,
   Skeleton,
   Stack,
   Typography,
   styled,
 } from '@mui/material';
+
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -78,18 +75,16 @@ const Home = () => {
   return (
     <Stack direction="column" spacing={4}>
       <ImageSlider />
-      <FormControl variant="outlined" sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id="sort-order">Sort</InputLabel>
-        <Select
-          id="sort-order-select"
-          value={sortOrder}
-          label="Sort"
-          onChange={handleSortChange}
-        >
-          <MenuItem value="inc">Inc</MenuItem>
-          <MenuItem value="dec">Dec</MenuItem>
-        </Select>
-      </FormControl>
+      <SelectMenu
+        inputLabel="Sort"
+        value={sortOrder}
+        onChange={handleSortChange}
+        sx={{ m: 1, minWidth: 120 }}
+        options={[
+          { id: 0, value: 'inc', label: 'Increment' },
+          { id: 1, value: 'dec', label: 'Decrement' },
+        ]}
+      />
       <Stack direction="row" spacing={3}>
         <Stack
           direction="column"
