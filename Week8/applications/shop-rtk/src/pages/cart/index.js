@@ -1,9 +1,16 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Box, Button, IconButton, Stack, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { removeFromCart } from '@/store/cartSlice';
 
 const Cart = () => {
+  const dispatch = useDispatch();
   const { cart, totalAmount } = useSelector((state) => state.cart);
+
+  const handleRemoveFromCart = (id, count) => {
+    dispatch(removeFromCart({ id, count }));
+  };
+
   return (
     <Stack spacing={2}>
       <Typography variant="h4" gutterBottom>
@@ -19,7 +26,10 @@ const Cart = () => {
             <Typography variant="body">{`${item.price} TL - ${item.count} adet`}</Typography>
           </Box>
           <Box>
-            <IconButton color="error">
+            <IconButton
+              color="error"
+              onClick={() => handleRemoveFromCart(item.id, item.count)}
+            >
               <DeleteIcon />
             </IconButton>
           </Box>

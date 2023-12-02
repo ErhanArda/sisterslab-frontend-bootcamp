@@ -67,13 +67,13 @@ const cartSlice = createSlice({
           state.cart = state.cart.filter((item) => item.id !== id);
         }
         state.itemCount -= count;
-        saveToLocalStorage(state.cart);
+        saveToLocaleStorage(state.cart);
       }
     },
     clearCart: (state) => {
       state.cart = [];
       state.itemCount = 0;
-      saveToLocalStorage(state.cart);
+      saveToLocaleStorage(state.cart);
     },
     getCartTotal: (state) => {
       let total = 0;
