@@ -46,7 +46,7 @@ const DashboardLayout = ({ children }) => {
           <IconButton color="inherit">
             <FavoriteBorderIcon />
           </IconButton>
-          <IconButton color="inherit">
+          <IconButton color="inherit" onClick={() => router.push('/cart')}>
             <Badge badgeContent={itemCount} color="error">
               <ShoppingCartIcon />
             </Badge>
