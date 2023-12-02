@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, Button, IconButton, Stack, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { removeFromCart } from '@/store/cartSlice';
+import { clearCart, getCartTotal, removeFromCart } from '@/store/cartSlice';
+import { useEffect } from 'react';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -9,6 +10,18 @@ const Cart = () => {
 
   const handleRemoveFromCart = (id, count) => {
     dispatch(removeFromCart({ id, count }));
+  };
+
+  const handleGetTotal = () => {
+    dispatch(getCartTotal());
+  };
+
+  useEffect(() => {
+    handleGetTotal();
+  }, [cart]);
+
+  const handleClearCart = () => {
+    dispatch(clearCart());
   };
 
   return (
@@ -35,12 +48,12 @@ const Cart = () => {
           </Box>
         </Box>
       ))}
-      <Typography>Toplam Tutar: {totalAmount}</Typography>
-      <Stack direction={{ xs: 'column', sm: 'row' }}>
+      <Typography>Toplam Tutar: {totalAmount.toFixed(2)} TL</Typography>
+      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
         <Button variant="contained" color="primary">
           Satin Al
         </Button>
-        <Button variant="contained" color="secondary">
+        <Button variant="contained" color="secondary" onClick={handleClearCart}>
           Sepeti Temizle
         </Button>
       </Stack>
