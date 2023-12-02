@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const isBrowser = () => typeof window !== undefined;
+// const isBrowser = () => typeof window !== undefined;
 
 const saveToLocaleStorage = (cart) => {
   localStorage.setItem('cart', JSON.stringify(cart));
@@ -11,6 +11,7 @@ export const fetchFromLocalStorage = () => {
   if (cart) {
     return JSON.parse(cart);
   }
+  return [];
 };
 // const saveToLocaleStorage = (cart) => {
 //     if (isBrowser) {
