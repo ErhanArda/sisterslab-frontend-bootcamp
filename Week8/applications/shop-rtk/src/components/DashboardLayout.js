@@ -9,8 +9,10 @@ import { Search, SearchIconWrapper, StyledInputBase } from './style';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchFromLocalStorage, updateCart } from '@/store/cartSlice';
+import { useRouter } from 'next/router';
 
 const DashboardLayout = ({ children }) => {
+  const router = useRouter();
   const { itemCount } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
@@ -23,7 +25,12 @@ const DashboardLayout = ({ children }) => {
     <>
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="open drawer">
+          <IconButton
+            onClick={() => router.push('/')}
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+          >
             <img src="logo_path_here" alt="Logo" />
           </IconButton>
           <Stack sx={{ flexGrow: 1 }} />
