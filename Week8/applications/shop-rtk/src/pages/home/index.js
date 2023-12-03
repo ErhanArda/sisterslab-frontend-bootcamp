@@ -27,7 +27,7 @@ const Home = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const { categories, loadingCategories, defaultCategory } = useSelector(
-    (state) => state.products
+    (state) => state.categories
   );
 
   const { products, loadingProducts } = useSelector((state) => state.products);
