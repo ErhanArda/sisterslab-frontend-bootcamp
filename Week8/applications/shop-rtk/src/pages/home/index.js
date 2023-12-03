@@ -1,16 +1,8 @@
-import ImageSlider from '@/components/ImageSlider';
-import SelectMenu from '@/components/SelectMenu';
-import { fetchCategories, fetchProductByCategory } from '@/store/productSlice';
 import {
   Box,
   Card,
   CardContent,
   CardMedia,
-  Divider,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
   Rating,
   Skeleton,
   Stack,
@@ -21,6 +13,10 @@ import {
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchCategories, fetchProductByCategory } from '@/store/productSlice';
+import ImageSlider from '@/components/ImageSlider';
+import SelectMenu from '@/components/SelectMenu';
+import CategoryList from './components/CategoryList';
 
 const PriceDisplay = styled(Box)(({ theme }) => ({
   fontWeight: 'bold',
@@ -86,30 +82,10 @@ const Home = () => {
         ]}
       />
       <Stack direction="row" spacing={3}>
-        <Stack
-          direction="column"
-          sx={{
-            borderRadius: '4px',
-            background: 'aliceBlue',
-            padding: '20px',
-            boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
-            height: 'fit-content',
-          }}
-          divider={<Divider orientation="horizontal" flexItem />}
-        >
-          <Typography variant="h4" color="grey">
-            Categories
-          </Typography>
-          <List component="nav">
-            {categories.map((category) => (
-              <ListItem key={category} disablePadding>
-                <ListItemButton onClick={() => handleCategoryClick(category)}>
-                  <ListItemText primary={category} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-        </Stack>
+        <CategoryList
+          categories={categories}
+          handleCategoryClick={handleCategoryClick}
+        />
 
         <Stack
           spacing={{ xs: 1, sm: 3, md: 3 }}
