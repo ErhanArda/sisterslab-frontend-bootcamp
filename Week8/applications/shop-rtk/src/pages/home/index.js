@@ -94,7 +94,7 @@ const Home = () => {
           flexWrap="wrap"
         >
           {loadingProducts
-            ? Array.from(new Array(6)).map((item, index) => (
+            ? Array.from(new Array(6)).map((index) => (
                 <Card key={index} sx={{ width: '345px' }}>
                   <Skeleton variant="rectangular" width="100%" height={140} />
                   <CardContent>
